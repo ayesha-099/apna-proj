@@ -6,17 +6,26 @@ using UnityEngine;
 public class enemyHealth : MonoBehaviour
 {
     [SerializeField] private healthbar _healthbar;
+   
     public int maxHealth = 2; // Maximum health (shots it can take)
     private int currentHealth;
+    private void Awake()
+    {
+       
+        _healthbar = GetComponentInChildren<healthbar>();
+    }
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
-        _healthbar.Updatehealthbar(maxHealth, currentHealth);
+       
+        _healthbar.UpdatehealthbarEnemy(maxHealth, currentHealth);
     }
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
+      
+        _healthbar.UpdatehealthbarEnemy(maxHealth, currentHealth);
         if (currentHealth <= 0)
         {
             Die();
