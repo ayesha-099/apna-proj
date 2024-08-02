@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
+//using TMPro.EditorUtilities;
 using UnityEngine;
 
 public class enemyHealth : MonoBehaviour
 {
+    [SerializeField] private healthbar _healthbar;
     public int maxHealth = 2; // Maximum health (shots it can take)
     private int currentHealth;
     // Start is called before the first frame update
     void Start()
     {
         currentHealth = maxHealth;
+        _healthbar.Updatehealthbar(maxHealth, currentHealth);
     }
     public void TakeDamage(int damage)
     {
