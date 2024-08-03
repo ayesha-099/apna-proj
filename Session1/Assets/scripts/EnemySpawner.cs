@@ -1,13 +1,12 @@
+
 //using System.Collections.Generic;
-//using System.Collections;
 //using UnityEngine;
 
 //public class EnemySpawner : MonoBehaviour
 //{
-//    public GameObject enemyPrefab; // Prefab for the enemy capsule
+//    public GameObject enemyPrefab; // Prefab for the enemy character
 //    public Transform[] spawnPoints; // Points where enemies will be spawned
 //    public Transform[] movePositions; // Positions where the enemies can move randomly
-//  //  public Transform crystal; // Reference to the cylinder
 //    public GameObject crystalPrefab; // Reference to the crystal prefab
 //    public GameObject bulletPrefab; // Bullet prefab (sphere)
 
@@ -22,15 +21,18 @@
 //    {
 //        foreach (Transform spawnPoint in spawnPoints)
 //        {
+//            // Instantiate the enemy at the spawn point
 //            GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 //            EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
-//            enemyAI.movePositions = movePositions;
-//         //   enemyAI.crystalPrefab = crystal;
-//            enemyAI.bulletPrefab = bulletPrefab;
-//            GameObject crystal = Instantiate(crystalPrefab, spawnPoint.position + Vector3.forward * 2, Quaternion.identity); // Adjust the position as needed
-//            enemyAI.crystal = crystal.transform; // Assign the instantiated crystal to the enemy AI
 
-//            enemies.Add(enemy);
+//            // Assign move positions and bullet prefab
+//            enemyAI.movePositions = movePositions;
+//            enemyAI.bulletPrefab = bulletPrefab;
+
+//            // Assign the crystal prefab to the enemy AI
+//            enemyAI.crystal = GameObject.FindWithTag("Crystal").transform;
+
+//            enemies.Add(enemy); // Add the enemy to the list
 //        }
 //    }
 //}
@@ -46,6 +48,19 @@ public class EnemySpawner : MonoBehaviour
     public GameObject bulletPrefab; // Bullet prefab (sphere)
 
     private List<GameObject> enemies = new List<GameObject>();
+    public static EnemySpawner Instance { get; private set; }
+
+    void Awake()
+    {
+        if (Instance != null && Instance != this)
+        {
+            Destroy(this.gameObject);
+        }
+        else
+        {
+            Instance = this;
+        }
+    }
 
     void Start()
     {
@@ -54,8 +69,9 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemies()
     {
-        foreach (Transform spawnPoint in spawnPoints)
+        for (int i = 0; i < 1; i++) // Spawn three enemies
         {
+            Transform spawnPoint = spawnPoints[i % spawnPoints.Length]; // Ensure spawn points are reused if fewer than three
             // Instantiate the enemy at the spawn point
             GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
             EnemyAI enemyAI = enemy.GetComponent<EnemyAI>();
@@ -64,10 +80,26 @@ public class EnemySpawner : MonoBehaviour
             enemyAI.movePositions = movePositions;
             enemyAI.bulletPrefab = bulletPrefab;
 
-            // Assign the crystal prefab to the enemy AI
-            enemyAI.crystal = GameObject.FindWithTag("Crystal").transform;
+            // Instantiate the crystal and assign it to the enemy AI
+            GameObject crystal = Instantiate(crystalPrefab, spawnPoint.position + Vector3.forward * 2, Quaternion.identity);
+            enemyAI.crystal = crystal.transform; // Assign the instantiated crystal to the enemy AI
 
             enemies.Add(enemy); // Add the enemy to the list
         }
+    }
+
+    public void RemoveEnemy(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        if (enemies.Count == 0)
+        {
+            EndGame();
+        }
+    }
+
+    void EndGame()
+    {
+        Debug.Log("You win, all enemies destroyed!");
+        // Implement any additional end game logic here
     }
 }

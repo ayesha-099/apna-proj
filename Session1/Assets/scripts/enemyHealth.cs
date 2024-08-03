@@ -1,51 +1,64 @@
+
 using System.Collections;
 using System.Collections.Generic;
-//using TMPro.EditorUtilities;
 using UnityEngine;
 
-public class enemyHealth : MonoBehaviour
+public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private healthbar _healthbar;
-   
-    public int maxHealth = 2; // Maximum health (shots it can take)
+    public int maxHealth = 10; // Maximum health (shots it can take)
     private int currentHealth;
-    private void Awake()
+    private int hitCount = 0; // Count the number of hits by player bullets
+    public int requiredHits = 10; // Number of hits required to destroy the enemy
+
+    private bool isHit = false; // Track if the enemy is hit to avoid double counting
+
+    void Awake()
     {
-       
         _healthbar = GetComponentInChildren<healthbar>();
     }
-    // Start is called before the first frame update
+
     void Start()
     {
         currentHealth = maxHealth;
-       
         _healthbar.UpdatehealthbarEnemy(maxHealth, currentHealth);
     }
+
     public void TakeDamage(int damage)
     {
         currentHealth -= damage;
-      
+        hitCount++;
         _healthbar.UpdatehealthbarEnemy(maxHealth, currentHealth);
-        if (currentHealth <= 0)
+
+        if (hitCount >= requiredHits || currentHealth <= 0)
         {
             Die();
         }
     }
+
     void Die()
     {
+        GameManager.instance.EnemyDestroyed(); // Notify GameManager of enemy destruction
         Destroy(gameObject);
-        Debug.Log("You win");
+        Debug.Log("Enemy destroyed");
     }
+
     void OnCollisionEnter(Collision collision)
     {
-        // Check if the collision is with a bullet with the tag "playerBullet"
-        if (collision.gameObject.CompareTag("playerBullet"))
+        if (collision.gameObject.CompareTag("playerBullet") && !isHit)
         {
+            isHit = true; // Set isHit to true to avoid double counting
             TakeDamage(1); // Reduce health by 1 for each bullet hit
-            Debug.Log("Attacking the enemy...");
-            Destroy(collision.gameObject); // Destroy the bullet after it hits the cylinder
+            Debug.Log("Attacking the enemy... " + hitCount);
+            Destroy(collision.gameObject); // Destroy the bullet after it hits the enemy
+
+            StartCoroutine(ResetHit()); // Reset isHit after a short delay to allow new hits
         }
     }
-    // Update is called once per frame
-    
+
+    IEnumerator ResetHit()
+    {
+        yield return new WaitForSeconds(0.1f); // Adjust the delay as needed
+        isHit = false; // Reset isHit to allow new hits to be registered
+    }
 }
