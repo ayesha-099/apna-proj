@@ -46,6 +46,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform[] movePositions; // Positions where the enemies can move randomly
     public GameObject crystalPrefab; // Reference to the crystal prefab
     public GameObject bulletPrefab; // Bullet prefab (sphere)
+    private GameObject crystal;
 
     private List<GameObject> enemies = new List<GameObject>();
     public static EnemySpawner Instance { get; private set; }
@@ -69,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemies()
     {
-        for (int i = 0; i < 1; i++) // Spawn three enemies
+        for (int i = 0; i < 2; i++) // Spawn three enemies
         {
             Transform spawnPoint = spawnPoints[i % spawnPoints.Length]; // Ensure spawn points are reused if fewer than three
             // Instantiate the enemy at the spawn point
@@ -81,8 +82,10 @@ public class EnemySpawner : MonoBehaviour
             enemyAI.bulletPrefab = bulletPrefab;
 
             // Instantiate the crystal and assign it to the enemy AI
-            GameObject crystal = Instantiate(crystalPrefab, spawnPoint.position + Vector3.forward * 2, Quaternion.identity);
-            enemyAI.crystal = crystal.transform; // Assign the instantiated crystal to the enemy AI
+          //  GameObject crystal = Instantiate(crystalPrefab, spawnPoint.position + Vector3.forward * 2, Quaternion.identity);
+           // enemyAI.crystal = crystal.transform; // Assign the instantiated crystal to the enemy AI
+                                                 // Assign the existing crystal to the enemy AI
+            enemyAI.crystal = GameManager.instance.crystalTransform;
 
             enemies.Add(enemy); // Add the enemy to the list
         }

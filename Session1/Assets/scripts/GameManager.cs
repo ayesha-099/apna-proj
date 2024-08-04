@@ -6,7 +6,8 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance; // Singleton instance
     private int enemiesDestroyed = 0; // Count of destroyed enemies
-    public int totalEnemies = 2; // Total number of enemies to be destroyed to win
+    public int totalEnemies = 3; // Total number of enemies to be destroyed to win
+    public Transform crystalTransform; // Reference to the crystal transform
 
     void Awake()
     {
