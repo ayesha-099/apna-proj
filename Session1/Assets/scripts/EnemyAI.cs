@@ -22,15 +22,25 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous; // Set collision detection mode
         MoveToRandomPosition();
+
+        if (agent.isOnNavMesh)
+        {
+            MoveToRandomPosition();
+        }
+        else
+        {
+            Debug.LogError("Agent is not on NavMesh at start");
+        }
     }
 
     void Update()
     {
-        // Random movement
-        if (!agent.pathPending && agent.remainingDistance < 0.5f)
+       // Random movement
+        if (!agent.pathPending && agent.remainingDistance < 6f)
         {
             MoveToRandomPosition();
         }
+
 
         // Attack logic
         if (crystal != null && Vector3.Distance(transform.position, crystal.position) < attackRange)

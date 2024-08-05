@@ -70,7 +70,7 @@ public class EnemySpawner : MonoBehaviour
 
     void SpawnEnemies()
     {
-        for (int i = 0; i < 2; i++) // Spawn three enemies
+        for (int i = 0; i < 5; i++) // Spawn three enemies
         {
             Transform spawnPoint = spawnPoints[i % spawnPoints.Length]; // Ensure spawn points are reused if fewer than three
             // Instantiate the enemy at the spawn point
