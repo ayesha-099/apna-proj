@@ -48,6 +48,7 @@ public class CylinderHealth : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("enemyBullet") && !isHit)
         {
+            Debug.Log("Collision detected with: " + collision.gameObject.name); // Add this line
             isHit = true; // Set isHit to true to avoid double counting
             TakeDamage(1); // Reduce health by 1 for each bullet hit
             Debug.Log("Attacking the crst... " + hitCount);
