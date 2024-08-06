@@ -22,7 +22,7 @@ public class EnemyAI : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         rb.collisionDetectionMode = CollisionDetectionMode.Continuous; // Set collision detection mode
         MoveToRandomPosition();
-       // animator.SetTrigger("");
+        animator.SetTrigger("run");
         if (agent.isOnNavMesh)
         {
             MoveToRandomPosition();

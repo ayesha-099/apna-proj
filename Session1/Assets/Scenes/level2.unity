@@ -1142,7 +1142,7 @@ PrefabInstance:
       objectReference: {fileID: 4081971969891029}
     - target: {fileID: 5488936468829702504, guid: d6d5ec6f085076f41977fb29b84826ef, type: 3}
       propertyPath: movePositions.Array.size
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5488936468829702504, guid: d6d5ec6f085076f41977fb29b84826ef, type: 3}
       propertyPath: movePositions.Array.data[0]
@@ -1168,13 +1168,18 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1920798495}
+    - target: {fileID: 8123791930838128718, guid: d6d5ec6f085076f41977fb29b84826ef, type: 3}
+      propertyPath: maxHealth
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 8123791930838128718, guid: d6d5ec6f085076f41977fb29b84826ef, type: 3}
+      propertyPath: requiredHits
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 1235488663663812145, guid: d6d5ec6f085076f41977fb29b84826ef, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1432287507}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d6d5ec6f085076f41977fb29b84826ef, type: 3}
 --- !u!1001 &254266408
 PrefabInstance:
@@ -3986,11 +3991,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4000012367416494, guid: 3782a82b94eb9d943bc073a9b0e5ad64, type: 3}
   m_PrefabInstance: {fileID: 953852162}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &962895067 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6115439247385261587, guid: 6f6e4769dfd09af409f21c5aa51e50a4, type: 3}
-  m_PrefabInstance: {fileID: 1891582607}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &962895068 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 782983341393349390, guid: 6f6e4769dfd09af409f21c5aa51e50a4, type: 3}
@@ -6327,12 +6327,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 1432287495}
   spawnPoints:
-  - {fileID: 1182651575}
   - {fileID: 1393740624}
+  - {fileID: 1182651575}
   movePositions:
   - {fileID: 1781318677}
-  - {fileID: 189221831}
-  - {fileID: 1210789223}
+  - {fileID: 1781318677}
+  - {fileID: 1781318677}
   crystalPrefab: {fileID: 1288542370037245}
   bulletPrefab: {fileID: 7826001931817265654, guid: 0bb3c9c09a07ac941a58a36b8fe16730, type: 3}
 --- !u!1001 &1306119740
@@ -6795,33 +6795,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 1904607887368668299, guid: d6d5ec6f085076f41977fb29b84826ef, type: 3}
   m_PrefabInstance: {fileID: 247347497}
   m_PrefabAsset: {fileID: 0}
---- !u!54 &1432287507
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1432287495}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!1001 &1442867001
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7390,7 +7363,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 5
---- !u!114 &1514172992
+--- !u!4 &1514172994 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 840d2a010b4a7ea48972247f8576edcd, type: 3}
+  m_PrefabInstance: {fileID: 1876471544}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1514172995
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -7399,19 +7377,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1514172990}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0f67d9c398a6d24daec23eac98476bb, type: 3}
+  m_Script: {fileID: 11500000, guid: c9166dc3f794d87499193216d8c96d25, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   trajectoryLine: {fileID: 2045026657}
   bowEndPosition: {fileID: 1834342819}
-  initialVelocity: 10
+  initialVelocity: 15
   gravity: 9.81
-  projectilePrefab: {fileID: 962895067}
---- !u!4 &1514172994 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 840d2a010b4a7ea48972247f8576edcd, type: 3}
-  m_PrefabInstance: {fileID: 1876471544}
-  m_PrefabAsset: {fileID: 0}
+  projectilePrefab: {fileID: 6115439247385261587, guid: 6f6e4769dfd09af409f21c5aa51e50a4, type: 3}
+  maxProjectiles: 20
 --- !u!1001 &1527139796
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9016,10 +8990,10 @@ PrefabInstance:
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 840d2a010b4a7ea48972247f8576edcd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1514172992}
+      addedObject: {fileID: 1514172991}
     - targetCorrespondingSourceObject: {fileID: 919132149155446097, guid: 840d2a010b4a7ea48972247f8576edcd, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1514172991}
+      addedObject: {fileID: 1514172995}
   m_SourcePrefab: {fileID: 100100000, guid: 840d2a010b4a7ea48972247f8576edcd, type: 3}
 --- !u!1001 &1880126868
 PrefabInstance:
