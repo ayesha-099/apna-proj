@@ -93,31 +93,7 @@ public class Projectilethrow : MonoBehaviour
 
         return trajectoryPoints;
     }
-    ///////////// for straight line projection ///////////
-    // List<Vector3> CalculateTrajectory(Vector3 startPosition, Vector3 direction, float initialVelocity, float maxLength)
-    // {
-    //     List<Vector3> trajectoryPoints = new List<Vector3>();
-
-    //     float time = 0f;
-    //     float deltaTime = 0.01f;
-
-    //     Vector3 currentPosition = startPosition;
-
-    //     // Increase the maxLength to generate a longer trajectory
-    //     float extendedMaxLength = maxLength * 40f; // or any other multiplier
-
-    //     while (Vector3.Distance(currentPosition, startPosition) < extendedMaxLength)
-    //     {
-    //         trajectoryPoints.Add(currentPosition);
-
-    //         // Move in a straight line
-    //         currentPosition += direction * deltaTime * initialVelocity;
-
-    //         time += deltaTime;
-    //     }
-
-    //     return trajectoryPoints;
-    // }
+    
 }
 
 // Add this script to the projectile prefab
