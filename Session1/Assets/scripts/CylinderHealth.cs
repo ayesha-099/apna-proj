@@ -11,7 +11,7 @@ public class CylinderHealth : MonoBehaviour
     private int currentHealth;
     private int hitCount = 0; // Count the number of hits by player bullets
     public int requiredHits = 10; // Number of hits required to destroy the enemy
-
+    public GameObject losePanel; // Reference to the lose panel
     private bool isHit = false; // Track if the enemy is hit to avoid double counting
 
     void Awake()
@@ -39,10 +39,12 @@ public class CylinderHealth : MonoBehaviour
 
     void Die()
     {
-      //  GameManager.instance.EnemyDestroyed(); // Notify GameManager of enemy destruction
+        //  GameManager.instance.EnemyDestroyed(); // Notify GameManager of enemy destruction
         Destroy(gameObject);
         Debug.Log("CRSTAL DESTORED");
+
     }
+
 
     void OnCollisionEnter(Collision collision)
     {
